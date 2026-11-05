@@ -189,6 +189,15 @@ def run(mode, train_items, test_items, epochs, bs, dev):
             co, fe, mask, lig, vox = [t.to(dev) for t in (co, fe, mask, lig, vox)]
             P += (m(co, fe, mask, lig, vox).cpu().numpy() * sd + mu).tolist(); Y += y.tolist()
     P, Y = np.array(P), np.array(Y)
+    os.makedirs("models", exist_ok=True)
+
+    torch.save({
+        "model_state_dict": m.state_dict(),
+        "mu": float(mu),
+        "sd": float(sd),
+        "mode": mode
+    }, f"models/{mode}.pth")
+
     return float(np.corrcoef(P, Y)[0, 1]), float(np.sqrt(np.mean((P - Y) ** 2))), P, Y
 
 if __name__ == '__main__':
