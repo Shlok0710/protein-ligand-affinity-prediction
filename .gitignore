@@ -218,3 +218,22 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+# PDBbind dataset
+data/
+PDBbind/
+*.pdb
+*.sdf
+*.mol2
+*.tar.gz
+
+# Trained models
+models/*.pth
+
+# Generated results
+outputs/
+
+# Python environment
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
